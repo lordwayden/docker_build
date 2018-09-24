@@ -1,0 +1,35 @@
+WILDCARD_DNS
+# Structure
+WILDCARD_DNS='tld1=1.1.1.1[=tld],tld2=2.2.2.2[=tld2]'
+WILDCARD_DNS='tld1=CNAME1[=tld],tld2=CNAME2[=tld2]'
+# Example
+## one entry
+WILDCARD_DNS='tld=192.168.0.1'
+## two entries
+WILDCARD_DNS='tld=192.168.0.1,example.org=192.168.0.2'
+## using CNAME's for resolving
+WILDCARD_DNS='tld=example.org'
+## reverse DNS
+WILDCARD_DNS='tld=192.168.0.1=tld'
+# complex
+WILDCARD_DNS='tld=example.org=tld,cytopia.tld=192.168.0.1=cytopia.tld'
+
+EXTRA_HOSTS
+# Structure
+EXTRA_HOSTS='host1=1.1.1.1[=host1],host2=2.2.2.2[=host2]'
+EXTRA_HOSTS='host1=CNAME1[=host1],host2=CNAME2[=host2]'
+# Example
+## one entry extra host 'tld'
+EXTRA_HOSTS='tld=192.168.0.1'
+## one entry extra host 'my.host'
+EXTRA_HOSTS='my.host=192.168.0.1'
+## two entries
+EXTRA_HOSTS='tld=192.168.0.1,example.org=192.168.0.2'
+## using CNAME's for resolving
+EXTRA_HOSTS='my.host=example.org'
+## reverse DNS
+EXTRA_HOSTS='tld=192.168.0.1=tld'
+
+DNS_FORWARDER
+## Example
+DNS_FORWARDER='8.8.8.8,192.168.0.10'

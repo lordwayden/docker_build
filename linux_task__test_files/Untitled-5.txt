@@ -1,0 +1,40 @@
+команда для автоматического получения бесплатного SSL-сертификата для домена:
+$ sudo certbot certonly -n -d yourdomain.com --email your@email.com --standalone --noninteractive --agree-tos
+
+
+поместить все файлы сертификатов в одну директорию
+$ mkdir ssl-certs
+$ cd ssl-certs
+$ ln -s /etc/letsencrypt/live/yourdomain.com/fullchain.pem ./yourdomain.com.crt
+$ ln -s /etc/letsencrypt/live/yourdomain.com/privkey.pem ./yourdomain.com.key
+
+Аналогичным образом мы можем получить сертификаты для любых, принадлежащих нам, 
+доменных имен и далее использовать их в качестве виртуальных хостов. 
+Единственное требование заключается в том, что A-записи этих доменных имен должны быть направленны на внешний 
+IP-адрес сервера, на котором вы и выполняете certbot certonly ...
+
+$ docker run -d -p 80:80 -p 443:443 \
+    ​-v /full/path/to/ssl-keys:/etc/nginx/certs \
+    ​-v /var/run/docker.sock:/tmp/docker.sock:ro \
+    ​jwilder/nginx-proxy
+-------------------------------------------------------------
+рабочей директорией сайта становится папка www (ее необходимо создать вручную)
+mkdir www
+-------------------------
+docker-compose.yml 
+web:
+    ​build: .
+    volumes:
+        - ./www:/var/www/html
+    environment:
+        - MYSQL_PASS=yourmysqlpassword
+        - VIRTUAL_HOST=yourdomain.com 
+Выполнить запуск с помощью docker-compose:
+$ docker-compose up
+-------------------------------------------------------------
+Все файлы в этой директории автоматически попадают и в /var/www/html внутри запущеного контейнера.
+---------------------------
+ docker-compose.yml выполнить связку с этим томом примерно так:
+volumes:
+​ - ./www:/var/www
+-----------------------------

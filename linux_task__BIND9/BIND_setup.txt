@@ -1,0 +1,46 @@
+﻿# BIND as primary DNS server
+
+Steps:
+1. Install BIND
+yum install bind
+
+2. Enable named service
+chkconfig named on
+
+3. Edit /etc/named.conf
+
+4. Start named ( BIND) service
+service named start
+
+5.Edit /etc/named.conf
+
+6. Copy /var/named/named.localhost
+cp named.localhost linuxtask.local
+
+7. Edit /var/named/linuxtask.local
+
+$TTL 1D
+@ IN SOA ns1.linuxtask.local. hostmaster.linuxtask.local. (
+0 ; serial
+1D ; refresh
+1H ; retry
+1W ; expire
+3H ) ; minimum
+
+IN NS ns1.linuxtask.local.
+@ IN MX 10 mail.linuxtask.local.
+ns1 IN A 192.168.0.20
+webserver IN A 192.168.0.25
+www IN CNAME webserver.linuxtask.local.
+mail IN A 192.168.0.30
+
+8. Modify file’s ownership
+chown root:named linuxtask.local
+
+9. service named reload
+
+10. Run dns queries against this DNS server
+dig @localhost ns1.linuxtask.local
+dig @localhost webserver.linuxtask.local
+dig @localhost linuxtask.local MX
+dig @localhost linuxtask.local NS

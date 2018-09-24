@@ -1,0 +1,27 @@
+// srv.world.lan
+
+$TTL 86400
+@   IN  SOA     dlp.srv.world. root.srv.world. (
+        2014071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+
+# define name server
+
+        IN  NS      dlp.srv.world.
+
+# internal IP address of name server
+
+        IN  A       10.0.0.30
+
+# define Mail exchanger
+
+        IN  MX 10   dlp.srv.world.
+
+# define IP address and hostname
+
+dlp     IN  A       10.0.0.30
+

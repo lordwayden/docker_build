@@ -1,0 +1,49 @@
+# ================================================ #
+# microsoft windows server core 2016
+> docker pull microsoft/windowsservercore:ltsc2016
+# ================================================ #
+# IIS
+> docker pull microsoft/iis
+# ================================================ #
+# .NET
+> docker pull microsoft/dotnet:2.0-sdk
+-------------
+.NET Core CLI
+.NET Core
+ASP.NET Core
+-------------
+> docker pull microsoft/dotnet:2.0-runtime
+> docker pull microsoft/aspnetcore
+# ================================================ #
+# opens folder
+> start .
+# ================================================ #
+# Microsoft Visual Studio
+File --> New --> Project [CRTL + SHIFT + N]
+Installed --> Visual C# --> Web
+    ASP.NET Web Application (.NET Framework)
+        Set name & Location [HelloWorld & c:\docker_build\code_deploy]
+
+HelloWorld [right click] --> Add --> Container Archistrator --> Docker --> Run Build [F5]
+# ================================================ #
+# Make Build
+> cd \docker_build\code_deploy\
+> docker build -t iis-site .
+
+# ================================================ #
+################ GitHub ###################
+> git init
+> git add .
+> git commit -m "first commit"
+> git remote add origin https://github.com/lordwayden/docker_build.git
+> git remote -v
+> git push origin master
+-------- change all by delete --------
+git rm -r *
+git commit -m "your comment"
+git push --set-upstream origin master
+git status
+git add -A
+git commit -m "your comment"
+git push
+--------------------------------------
